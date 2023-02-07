@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import TodoContext from './context/TodoContext';
+import Router from './routes/Router';
+import { useState, useEffect, useCallback } from 'react';
+import useToDO from './utils/useToDo';
 
 function App() {
+  const {toDo, addToDo, deleteToDo, updateToDo} = useToDO();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodoContext.Provider value={{
+        data:toDo,
+        addToDo: addToDo,
+        updateToDo: updateToDo,
+        deleteToDo: deleteToDo,
+      }}>
+      <Router></Router>
+    </TodoContext.Provider>
   );
 }
 
